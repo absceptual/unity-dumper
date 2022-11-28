@@ -31,4 +31,25 @@ position->z = 2.0;
 ## Dumping offsets
 Below is an example of how one could dump offsets to be used in an external cheat.
 
+```cpp
+#include <cstdint>
+#include <src/dumper/il2cpp.hpp> // different for where you decide to include your files
+
+// code somewhere..
+void dump() 
+{
+	for (const auto image :  game->get_images()) 
+	{
+		printf("[+] Image: %s (0x%x)\n", image->get_name(), image->instance());
+		for (const auto klass : image->get_classes())
+		{
+			printf("\t[+] Class: %s (0x%x)\n", klass->get_name(), klass->instance());
+			for (const auto field : klass->get_fields())
+			{
+				printf("\t\t[+] Field: %s (0x%x)\n", field->get_name(), field->instance());
+			}
+		}
+	}
+}
+```
 
