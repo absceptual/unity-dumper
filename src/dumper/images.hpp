@@ -14,6 +14,11 @@ public:
         
     Image(void* address) : m_instance{ static_cast<uintptr_t>(address) } { };
     
+    auto get_class() const -> Class*
+    {
+       static auto count = api::get_class_count(this);
+    }
+    
     auto get_name() const { return m_name; }
     auto get_instance() const { return m_instance; }
 };
