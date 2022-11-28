@@ -6,16 +6,14 @@ class Image
 {
 private:
     std::uintptr_t m_instance { };
-    std::vector<Class*> m_classes { };
-
+    classes_t m_classes { };
+    const char* m_name { };
+    
 public:
-    Image(std::string e)
-    {
-        ;;
-    }
-
-    const char* get_name() const
-    {
-        return api::get_image_name(this);
-    }
+    using classes_t = std::vector<Class*>
+        
+    Image(void* address) : m_instance{ static_cast<uintptr_t>(address) } { };
+    
+    auto get_name() const { return m_name; }
+    auto get_instance() const { return m_instance; }
 };
