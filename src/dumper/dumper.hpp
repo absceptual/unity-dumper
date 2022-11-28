@@ -1,19 +1,19 @@
 #include <algorithm>
 #include <cstdint>
-#include <stdio.h>
 #include <string>  
-#include <string.h>
 #include <vector>
 
 #include <src/dumper/images.hpp>
-#include <src/dumper/classes.hpp>
 #include <src/dumper/api.hpp>
 
-class Il2cpp
+class Dumper
 {
 private:
-    std::vector<Image*> m_images { };
+    using images_t = std::vector<Image*>;
+    images_t m_images { };
+    
 public:
+    
     // Dumps all images on initalization
     Il2cpp() 
     {
@@ -28,12 +28,16 @@ public:
     
     };
 
+    // Loop through current image names and checks their names to find a matching image
     auto get_image(const char* name) const -> Image*
     {
-        const auto image { std::find_if(m_images.begin(), m_images.end(), [name](Image* image){
-            return !strcmp(image->get_name(), name);
-        }) };
-
-        return (image != m_images.end()) ? *image : nullptr;
+        for (const auto image : m_images)
+        {
+            if (!strcmp(name, image->get_name())
+                return image;
+        }
+        return nullptr;
     }
+                
+    auto get_images() const -> images_t { return m_images; }
 };
