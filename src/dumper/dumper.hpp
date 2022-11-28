@@ -9,13 +9,13 @@
 class Dumper
 {
 private:
-    using images_t = std::vector<Image*>;
     images_t m_images { };
     
 public:
+    using images_t = std::vector<Image*>;
     
     // Dumps all images on initalization
-    Il2cpp() 
+    Dumper() 
     {
         size_t count = 0U;
         const auto domain = api::get_domain();
