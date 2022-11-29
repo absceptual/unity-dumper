@@ -46,10 +46,13 @@ void dump()
 			printf("\t[+] Class: %s (0x%llx)\n", klass->get_name(), static_cast< uintptr_t* >(klass));
 			for (const auto field : klass->get_fields())
 			{
-				printf("\t\t[+] Field: %s (0x%x)\n", field->get_name(), field->instance());
+				printf("\t\t[+] Field: %s (0x%x)\n", api::get_field_name(field), api::get_field_offset(field));
 			}
 		}
 	}
 }
 ```
+
+## Limitations
+- When getting classes from an image, the dumper does not include .NET classes (Il2CppObjects) such as ListDictionaries. This will be included in a future update.
 
