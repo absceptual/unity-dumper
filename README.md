@@ -6,7 +6,7 @@ An internal dumper for eliminating the need for offsets in games using the Il2cp
 
 First, initalize an Memity il2cpp object like this. (It is recommended to allocate it on the heap if possible)
 ```cpp
-const auto game = new Il2Cpp();
+const auto game = new Dumper();
 ```
 Memity will automatically resolve the exports from Il2cpp by itself.
 ### Retrieving class types from images
@@ -40,10 +40,10 @@ void dump()
 {
 	for (const auto image :  game->get_images()) 
 	{
-		printf("[+] Image: %s (0x%x)\n", image->get_name(), image->instance());
+		printf("[+] Image: %s (0x%llx)\n", image->get_name(), static_cast< uintptr_t* >(image));
 		for (const auto klass : image->get_classes())
 		{
-			printf("\t[+] Class: %s (0x%x)\n", klass->get_name(), klass->instance());
+			printf("\t[+] Class: %s (0x%llx)\n", klass->get_name(), static_cast< uintptr_t* >(klass));
 			for (const auto field : klass->get_fields())
 			{
 				printf("\t\t[+] Field: %s (0x%x)\n", field->get_name(), field->instance());
