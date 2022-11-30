@@ -66,8 +66,10 @@ void dump()
 	}
 }
 ```
+## Rust example
+[Rust BasePlayer dump](dump.PNG "Rust BasePlayer dump") 
 
-## Other necessary information
+### Other necessary information
 - When getting classes from an image, the dumper does not include templated classes such as ListDictionaries.
 - If you would like to get a class inside of a class, use the ``Class::get_nested_type(const char* name)`` method. Make sure the class is pointing to a valid class type.
 - I plan to add functionality to automatically dump information and format it into a proper header file, if you'd like to add that functionality feel free to make a pull request.
