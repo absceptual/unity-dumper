@@ -1,6 +1,7 @@
 
 # Memity!
 An internal dumper for eliminating the need for offsets in games using the Il2cpp backend or optionally dumping offsets to be used in an external cheat.
+No need to tinker with Unity metadata files, everything is processed at runtime.
 
 # How do I use it?
 
@@ -10,16 +11,15 @@ api::init();
 const auto game = std::make_unique<Dumper>(new Dumper());
 ```
 All subsequent calls on any dumper classes **will** fail if the api is not initalized.
-Memity needs resolve the exports from Il2cpp.
+Memity needs to resolve the exports from Il2cpp.
 
 ### Retrieving class types from images
 Before dumping Il2CppClasses classes, you first have to get the image associated with the class. Afterwards, you can retrieve the Il2CppClass.
 ```cpp
-const auto image = game->get_image("Assembly-CSharp.dll")
-const auto base_player = image->get_class("BasePlayer")
+const auto image = game->get_image("Assembly-CSharp.dll");
+const auto base_player = image->get_class("BasePlayer");
 ```
 ### Modifying fields
-
 When you get the field of a function, it returns a void pointer, leaving it up to the programmer to decide what to do with it.
 ```cpp
 // Class functions
@@ -32,7 +32,7 @@ position->y = 3.0;
 position->z = 2.0;
 ```
 ## Dumping offsets
-Below is an example of how one could dump offsets to be used in an external cheat.
+Below is an example of how one could dump offsets to be used in an external application.
 
 ```cpp
 #include <cstdint>
@@ -70,4 +70,6 @@ void dump()
 ## Other necessary information
 - When getting classes from an image, the dumper does not include templated classes such as ListDictionaries.
 - If you would like to get a class inside of a class, use the ``Class::get_nested_type(const char* name)`` method. Make sure the class is pointing to a valid class type.
+- I plan to add functionality to automatically dump information and format it into a proper header file, if you'd like to add that functionality feel free to make a pull request.
+- This is my first real "release" of something, constructive critism is appreciated. Additionally, ``api.hpp`` contains some useful il2cpp exports if you'd like to fiddle around with it yourself.
 
