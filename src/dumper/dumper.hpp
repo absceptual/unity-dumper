@@ -12,11 +12,11 @@ public:
     using images_t  = std::vector<Image*>;
 private:
     images_t  m_images { };
-    Image::classes_t m_classes { };
+
 public:
     
     // Dumps all images on initalization
-    Dumper(bool use_global_class_table = false)
+    Dumper()
     {
         size_t count = 0U;
         const auto domain = api::get_domain();
@@ -25,13 +25,8 @@ public:
         for (size_t index = 0U; index < count; ++index)
         {
             auto image = api::get_image(assemblies[index]);
-            m_images.emplace_back(static_cast< Image* >(image));
-
-            if (use_global_class_table)
-            {
-               for (const auto klass : image->get_classes())
-                    m_classes.emplace_back(klass);
-            }
+            if (image)
+                m_images.emplace_back(static_cast< Image* >(image)); 
         }
 
     };
@@ -50,6 +45,5 @@ public:
     // Returns image table
     auto get_images() const -> images_t { return m_images; }
 
-    // Returns all global classes
-    auto get_all_classes() const -> Image::classes_t { return m_classes; }
+   
 };

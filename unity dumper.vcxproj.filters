@@ -21,54 +21,6 @@
     <ClInclude Include="src\dumper\images.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="extern\il2cpp\blob.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="extern\il2cpp\class-internals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="extern\il2cpp\il2cpp-debugger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="extern\il2cpp\metadata.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="extern\il2cpp\normalization-tables.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="extern\il2cpp\number-formatter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="extern\il2cpp\object-internals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="extern\il2cpp\tabledefs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="extern\il2cpp\types.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="extern\il2cpp\char-conversions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="extern\il2cpp\icallincludes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="extern\il2cpp\il2cpp-api.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="extern\il2cpp\il2cpp-api-functions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="extern\il2cpp\il2cpp-api-types.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="extern\il2cpp\il2cpp-config.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="extern\il2cpp\il2cpp-metadata.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\dumper\api.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -80,11 +32,5 @@
     <ClCompile Include="src\example.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="extern\il2cpp\libil2cpp.def">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="extern\il2cpp\libil2cpp.icalls" />
   </ItemGroup>
 </Project>

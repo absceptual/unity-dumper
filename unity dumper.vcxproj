@@ -135,22 +135,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="extern\il2cpp\blob.h" />
-    <ClInclude Include="extern\il2cpp\char-conversions.h" />
-    <ClInclude Include="extern\il2cpp\class-internals.h" />
-    <ClInclude Include="extern\il2cpp\icallincludes.h" />
-    <ClInclude Include="extern\il2cpp\il2cpp-api-functions.h" />
-    <ClInclude Include="extern\il2cpp\il2cpp-api-types.h" />
-    <ClInclude Include="extern\il2cpp\il2cpp-api.h" />
-    <ClInclude Include="extern\il2cpp\il2cpp-config.h" />
-    <ClInclude Include="extern\il2cpp\il2cpp-debugger.h" />
-    <ClInclude Include="extern\il2cpp\il2cpp-metadata.h" />
-    <ClInclude Include="extern\il2cpp\metadata.h" />
-    <ClInclude Include="extern\il2cpp\normalization-tables.h" />
-    <ClInclude Include="extern\il2cpp\number-formatter.h" />
-    <ClInclude Include="extern\il2cpp\object-internals.h" />
-    <ClInclude Include="extern\il2cpp\tabledefs.h" />
-    <ClInclude Include="extern\il2cpp\types.h" />
     <ClInclude Include="src\dumper\api.hpp" />
     <ClInclude Include="src\dumper\classes.hpp" />
     <ClInclude Include="src\dumper\images.hpp" />
@@ -158,10 +142,6 @@
   <ItemGroup>
     <ClCompile Include="src\example.cpp" />
     <ClCompile Include="src\dumper\dumper.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="extern\il2cpp\libil2cpp.def" />
-    <None Include="extern\il2cpp\libil2cpp.icalls" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
