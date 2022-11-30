@@ -7,7 +7,7 @@ An internal dumper for eliminating the need for offsets in games using the Il2cp
 First, initalize the api used by Memity and create a Dumper object. (You can initalize it on the heap or stack if you'd prefer).
 ```cpp
 api::init();
-const auto game = std::make_unique<Dumper>(new Dumper(false));
+const auto game = std::make_unique<Dumper>(new Dumper());
 ```
 All subsequent calls on any dumper classes **will** fail if the api is not initalized.
 Memity needs resolve the exports from Il2cpp.
