@@ -67,7 +67,7 @@ void dump()
 }
 ```
 ## Rust example
-[Rust BasePlayer dump](dump.PNG "Rust BasePlayer dump") 
+![Rust BasePlayer dump](dump.PNG "Rust BasePlayer dump") 
 
 ### Other necessary information
 - When getting classes from an image, the dumper does not include templated classes such as ListDictionaries.
