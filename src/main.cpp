@@ -1,6 +1,5 @@
 
 #include <iostream>
-
 #include <src/dumper/dumper.hpp>
 
 auto startup()
@@ -26,31 +25,26 @@ DWORD WINAPI entry_point(HMODULE module)
 	auto output{ startup() };
 	printf("[memity] console started\n");
 
+
+	// Example for Rust (x64)
 	api::init();
-	const auto dumper = std::make_unique<Dumper>(new Dumper(false));
+	printf("[memity] api initalized\n");
 
-	for (const auto image : dumper->get_images())
+	const auto game = std::make_unique<Dumper>();
+	printf("[memity] images dumped\n");
+
+	const auto image = game->get_image("Assembly-CSharp.dll");
+	printf("[memity] Assembly-CSharp -> %s (0x%llx)\n", image->get_name(), reinterpret_cast<uintptr_t>(image));
+
+	const auto base_player = image->get_class("BasePlayer");
+	printf("[memity] BasePlayer -> %s (0x%llx)\n", base_player->get_name(), reinterpret_cast<uintptr_t>(base_player));
+	
+	for (const auto field : base_player->get_fields())
 	{
-		if (strcmp(image->get_name(), "Facepunch.System.dll") != 0)
-			continue;
-
-		printf("[memity] current image: %s (0x%llx)\n", image->get_name(), static_cast<void*>(image));
-		for (const auto object : image->get_classes())
-		{
-			const auto klass = static_cast<Class*>(object); // Cast from void* to our custom Il2CppClass implementation
-
-			if (klass)
-			{
-				printf("\t[memity] dumping class %s (0x%llx)\n", klass->get_name(), static_cast<void*>(klass));
-				for (const auto field : klass->get_fields())
-				{
-					if (field)
-						printf("\t\t[memity] field %s dumped at offset 0x%x\n", api::get_field_name(field), klass->get_field_offset(api::get_field_name(field)));
-				}
-			}
-		}
+		const auto name = api::get_field_name(field);
+		printf("\t[memity] %s (0x%zx)\n", name, base_player->get_field_offset(name));
 	}
-
+	
 	Sleep(50000);
 	return cleanup(module, output);
 }
