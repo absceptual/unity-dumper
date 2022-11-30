@@ -6,7 +6,7 @@ class Class
 public:
     using fields_t = std::vector<void*>;
 private:
-	const char* m_name { };
+    const char* m_name { };
 
 public:
     Class() = default;
