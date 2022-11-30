@@ -4,11 +4,14 @@ An internal dumper for eliminating the need for offsets in games using the Il2cp
 
 # How do I use it?
 
-First, initalize an Memity il2cpp object like this. (It is recommended to allocate it on the heap if possible)
+First, initalize the api used by Memity and create a Dumper object. (You can initalize it on the heap or stack if you'd prefer).
 ```cpp
-const auto game = new Dumper();
+api::init();
+const auto game = std::make_unique<Dumper>(new Dumper(false));
 ```
-Memity will automatically resolve the exports from Il2cpp by itself.
+All subsequent calls on any dumper classes **will** fail if the api is not initalized.
+Memity needs resolve the exports from Il2cpp.
+
 ### Retrieving class types from images
 Before dumping Il2CppClasses classes, you first have to get the image associated with the class. Afterwards, you can retrieve the Il2CppClass.
 ```cpp
@@ -33,26 +36,38 @@ Below is an example of how one could dump offsets to be used in an external chea
 
 ```cpp
 #include <cstdint>
-#include <src/dumper/il2cpp.hpp> // different for where you decide to include your files
+#include <src/dumper/dumper.hpp> // different for where you decide to include your files
 
 // code somewhere..
 void dump() 
 {
-	for (const auto image :  game->get_images()) 
+	// Initalize our API if it isn't already
+	api::init();
+	
+	// Passing false since we won't be using the global class table
+	const auto dumper = std::make_unique<Dumper>(new Dumper(false)); 
+
+	for (const auto image : dumper->get_images())
 	{
-		printf("[+] Image: %s (0x%llx)\n", image->get_name(), static_cast< uintptr_t* >(image));
-		for (const auto klass : image->get_classes())
+		printf("[memity] current image: %s (0x%llx)\n", image->get_name(), static_cast< void* >(image));
+		for (const auto object : image->get_classes())
 		{
-			printf("\t[+] Class: %s (0x%llx)\n", klass->get_name(), static_cast< uintptr_t* >(klass));
-			for (const auto field : klass->get_fields())
+			const auto klass = static_cast< Class* >(object); // Cast from void* to our custom Il2CppClass implementation
+			if (klass)
 			{
-				printf("\t\t[+] Field: %s (0x%x)\n", api::get_field_name(field), api::get_field_offset(field));
+				printf("\t[memity] dumping class %s (0x%llx)\n", klass->get_name(), static_cast< void* >(klass));
+				for (const auto field : klass->get_fields())
+				{
+					if (field)
+						printf("\t\t[memity] field %s dumped at offset 0x%x\n", api::get_field_name(field), klass->get_field_offset(api::get_field_name(field)));
+				}
 			}
 		}
 	}
 }
 ```
 
-## Limitations
-- When getting classes from an image, the dumper does not include .NET classes (Il2CppObjects) such as ListDictionaries. This will be included in a future update.
+## Other necessary information
+- When getting classes from an image, the dumper does not include templated classes such as ListDictionaries.
+- If you would like to get a class inside of a class, use the ``Class::get_nested_type(const char* name)`` method. Make sure the class is pointing to a valid class type.
 
