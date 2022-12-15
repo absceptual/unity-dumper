@@ -14,7 +14,8 @@ private:
     images_t  m_images { };
 
 public:
-    
+    static std::unique_ptr<Dumper>& global;
+
     // Dumps all images on initalization
     Dumper()
     {

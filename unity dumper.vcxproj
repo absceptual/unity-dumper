@@ -135,13 +135,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\dumper\dumper.hpp" />
+    <ClInclude Include="src\sdk\entities.h" />
     <ClInclude Include="src\dumper\api.hpp" />
     <ClInclude Include="src\dumper\classes.hpp" />
     <ClInclude Include="src\dumper\images.hpp" />
+    <ClInclude Include="src\sdk\classes.h" />
+    <ClInclude Include="src\sdk\unity.h" />
+    <ClInclude Include="src\util\globals.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\example.cpp" />
-    <ClCompile Include="src\dumper\dumper.hpp" />
+    <ClCompile Include="src\generator.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

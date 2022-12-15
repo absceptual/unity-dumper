@@ -1,6 +1,9 @@
 
 #include <iostream>
-#include <src/dumper/dumper.hpp>
+
+#include <src/util/globals.h>
+#include <src/sdk/entities.h>
+
 
 auto startup()
 {
@@ -20,32 +23,49 @@ DWORD cleanup(HMODULE module, FILE* output)
 	return 0;
 }
 
+
 DWORD WINAPI entry_point(HMODULE module)
 {
 	auto output{ startup() };
+
+	api::init();
 	printf("[memity] console started\n");
 
 
-	// Example for Rust (x64)
-	api::init();
 	printf("[memity] api initalized\n");
 
-	const auto game = std::make_unique<Dumper>();
-	printf("[memity] images dumped\n");
+	globals::game = std::make_unique<Dumper>();
 
-	const auto image = game->get_image("Assembly-CSharp.dll");
-	printf("[memity] Assembly-CSharp -> %s (0x%llx)\n", image->get_name(), reinterpret_cast<uintptr_t>(image));
-
-	const auto base_player = image->get_class("BasePlayer");
-	printf("[memity] BasePlayer -> %s (0x%llx)\n", base_player->get_name(), reinterpret_cast<uintptr_t>(base_player));
-	
-	for (const auto field : base_player->get_fields())
+	const auto entitylist = EntityList::GetEntityList(globals::game);
+	const auto lplayer = reinterpret_cast<BaseCombatEntity*>(entitylist->get_entity(1));
+	if (lplayer)
 	{
-		const auto name = api::get_field_name(field);
-		printf("\t[memity] %s (0x%zx)\n", name, base_player->get_field_offset(name));
+		const auto prefab = lplayer->get_prefab_name();
+		const auto model = lplayer->get_model();
+		if (model)
+		{
+			//const auto bone_transforms = model->get_bone_transforms();
+			//const auto bone_names = model->get_bone_names();
+			const auto bones = lplayer->get_bones();
+
+			for (int i = 0; i < bones->count; ++i)
+			{
+				const auto bone = lplayer->get_bone(i);
+				const auto name = bone->name;
+	
+				printf("[memity] bone: %ls\n", name->get_phrase()->text);
+
+			}
+			
+
+			//Vector3 position;
+			// reinterpret_cast<Transform*>(bone_transforms->buffer[0])->get_position(&position);
+		}
 	}
 	
-	Sleep(50000);
+
+
+	Sleep(1600);
 	return cleanup(module, output);
 }
 

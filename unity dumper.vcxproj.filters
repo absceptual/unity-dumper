@@ -24,12 +24,27 @@
     <ClInclude Include="src\dumper\api.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\sdk\unity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sdk\classes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sdk\entities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\globals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\dumper\dumper.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\dumper\dumper.hpp">
+    <ClCompile Include="src\example.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\example.cpp">
+    <ClCompile Include="src\generator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

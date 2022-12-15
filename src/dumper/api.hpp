@@ -16,6 +16,10 @@ namespace api
 {
     inline bool initalized { false };
 
+
+    using get_function_t                            = void* (APICALL*)(const char*);
+    inline get_function_t get_function              = nullptr;
+
     // domain & assembly
     using get_domain_t                              = void* (APICALL*)(void);
     using get_assemblies_t                          = void** (APICALL*)(const void* domain, size_t* count);
@@ -57,11 +61,19 @@ namespace api
     using get_fields_t                              = void* (APICALL*)(const void* klass, void* iter);
     using get_field_name_t                          = const char* (APICALL*)(const void* field);
 
+
     inline get_field_t get_field                    = nullptr;
     inline get_field_offset_t get_field_offset      = nullptr;
     inline get_field_count_t get_field_count        = nullptr;
     inline get_fields_t get_fields                  = nullptr;
     inline get_field_name_t get_field_name          = nullptr;
+
+    // methods
+    using get_method_from_name_t                       = void* (APICALL*)(void* klass, const char* name, int args);
+
+
+    inline get_method_from_name_t get_method_from_name = nullptr;
+
 
     // Required to be called before initalization of the dumper for the rest of the dumper to work properly
     inline void init();
@@ -136,5 +148,13 @@ void api::init()
 
     get_field_name = reinterpret_cast<get_field_name_t>(
         GetProcAddress(GetModuleHandle(L"GameAssembly.dll"), "il2cpp_field_get_name")
+    );
+
+    get_function = reinterpret_cast<get_function_t>(
+        GetProcAddress(GetModuleHandle(L"GameAssembly.dll"), "il2cpp_resolve_icall")
+    );
+
+    get_method_from_name = reinterpret_cast<get_method_from_name_t>(
+        GetProcAddress(GetModuleHandle(L"GameAssembly.dll"), "il2cpp_class_get_method_from_name")
     );
 }

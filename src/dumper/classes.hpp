@@ -13,13 +13,13 @@ public:
 
     // Returns a field by name
     template <typename type>
-    auto get_field(const char* name) const
+    auto get_field(const char* name) const -> type
     {
-        const auto field = api::get_field(this, name);
+        auto field = api::get_field(this, name);
         if (!field)
             return nullptr;
 
-        const auto offset = api::get_field_offset(field);
+        auto offset = api::get_field_offset(field);
         return reinterpret_cast< type >(this + offset);
     }
 
