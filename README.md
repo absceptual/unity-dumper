@@ -1,3 +1,7 @@
+## Note: This project is no longer maintained, I have no idea if it'll still work or not..
+
+
+
 
 # Memity!
 An internal dumper for eliminating the need for offsets in games using the Il2cpp backend or optionally dumping offsets to be used in an external cheat.
